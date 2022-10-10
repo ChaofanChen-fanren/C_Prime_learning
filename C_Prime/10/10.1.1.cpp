@@ -2,14 +2,16 @@
 #include <algorithm>
 #include <istream>
 #include <iterator>
-
+#include <vector>
+using namespace std;
 int main()
 {
-    std::istream_iterator<int> in_int(std::cin);
-    std::istream_iterator<int> eof;
+    vector<int> v = {42, 42, 42, 42, 42, 42};
+    int ia[] = {42, 42, 42, 42, 42, 42};
+    int* result = find(begin(ia) + 3, begin(ia) + 4, 42);
 
-    while (in_int != eof) {
-        std::cout << (*in_int++) << std::endl;
-    }
+    vector<int>::iterator res = find(v.begin(), v.end(), 42);
+    cout << *result << endl;
+    cout << *res << endl;
     return 0;
 }
