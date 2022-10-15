@@ -4,8 +4,9 @@ from django.http import HttpResponse
 from myapp.models import Stu
 # Create your views here.
 
-def index(resquest):
-    return HttpResponse("Hello World")
+logo='welcome to itcast'
+def index(request):
+    return render(request, 'myapp/index.html', {'logo': logo})
 
 def add(request):
     lists = Stu.objects.all()
@@ -14,4 +15,9 @@ def add(request):
     
     print(Stu.objects.get(id=6))
     return HttpResponse("ADD.....")
-    
+
+def goodslist(request):
+    return render(request, 'myapp/goodslist.html', {'logo': logo})
+
+def userpwd(request):
+    return render(request, 'myapp/userpwd.html', {'logo': logo})
