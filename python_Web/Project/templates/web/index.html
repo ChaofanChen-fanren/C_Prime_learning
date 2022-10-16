@@ -1,0 +1,95 @@
+<!-- 声明文档类型 -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!--更多资源：https://gitee.com/iGaoWei/big-data-view -->
+    <!-- 指定网页字符编码 -->
+    <meta charset="UTF-8">
+    <!-- 适配移动端 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>湖工新闻可视化系统</title>
+    <link rel="stylesheet" href="{% static 'web/css/index.css' %}">
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+</head>
+
+<body>
+    <div id="title">湖工新闻可视化系统</div>
+    <div id="left1">left1
+    </div>
+    <div id="left2">left2
+    </div>
+    <div id="center1">
+        <div class="item">
+            <div class="number" id="confirm">1</div>
+            <div class="text">校庆办</div>
+        </div>
+        <div class="item">
+            <div class="number" id="heal">2</div>
+            <div class="text">党委组织部</div>
+        </div>
+        <div class="item">
+            <div class="number" id="dead">3</div>
+            <div class="text">党委宣传部</div>
+        </div>
+        <div class="item">
+            <div class="number" id="nowConfirm">4</div>
+            <div class="text">国际交流与合作处</div>
+        </div>
+        <div class="item">
+            <div class="number" id="noInfect">5</div>
+            <div class="text">社会资源处</div>
+        </div>
+        <div class="item">
+            <div class="number" id="importedCase">6</div>
+            <div class="text">计算机学院</div>
+        </div>
+    </div>
+    <div id="center2">
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('center2'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '相关学校机构发表文章篇数'
+            },
+            tooltip: {},
+            legend: {
+                data: ['销量']
+            },
+            xAxis: {
+                data: {{ data.name|safe }}
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: '销量',
+                    type: 'bar',
+                    data: {{ data.data|safe }}
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    </div>
+    <div id="right1">right1</div>
+    <div id="right2">right2</div>
+    <!--更多资源：https://gitee.com/iGaoWei/big-data-view -->
+    <!-- <script src="{% static 'web/js/data.js' %}"></script>
+    <script src="{% static 'web/js/center1.js' %}"></script>
+    <script src="{% static 'web/js/echarts.min.js' %}"></script>
+    <script src="{% static 'web/js/china.js' %}"></script>
+    <script src="{% static 'web/js/center2.js' %}"></script>
+    <script src="{% static 'web/js/left1.js' %}"></script>
+    <script src="{% static 'web/js/left2.js' %}"></script>
+    <script src="{% static 'web/js/right1.js' %}"></script>
+    <script src="{% static 'web/js/right2.js' %}"></script> -->
+</body>
+
+</html>
