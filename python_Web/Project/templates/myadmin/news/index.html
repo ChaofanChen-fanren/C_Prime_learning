@@ -31,6 +31,16 @@
 
 
 {% block main_body %}
+    <script type="text/javascript">
+        function brightenKeyword(val, keyword) {
+            const Reg = new RegExp(keyword, 'i');
+            let res = '';
+            if (val) {
+                res = val.replace(Reg, `<span style="color: red;">${keyword}</span>`);
+                return res;
+            }
+        }
+    </script>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -55,7 +65,7 @@
                         <div class="box-tools">
                             <form action="{% url 'myadmin_news_index' 1 %}" method="get">
                                 <div class="input-group input-group-sm" style="width:150px;">
-                                    <input type="text" name="keyword" class="form-control pull-right" placeholder="账号/昵称">
+                                    <input type="text" name="keyword" class="form-control pull-right" placeholder="关键词" {% if kw_list %}value={{kw_list.0}}{% endif %}>
                             
                                     <div class="input-group-btn">
                                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
@@ -80,7 +90,7 @@
                             <tr>
 
                                 <td>{{new.id}}</td>
-                                <td>{{new.title}}</td>
+                                <td><a href="{{new.urls}}" target="_blank">{{new.title}}</a></td>
                                 <td>{{new.date|date:'Y-m-d'}}</td>
                                 <td>{{new.school}}</td>
                                 <td>
@@ -91,7 +101,18 @@
                                         <span style="color: red">删除</span>
                                     {% endif %} -->
                                 </td>
-                                <td>{{new.content}}......</td>
+                                <td>
+                                    {% if kw_list %}
+                                        <script type="text/javascript" language="javascript">
+                                            var s = '{{kw_list.0}}';
+                                            var str = "{{new.content}}";
+                                            var newstr = str.replace(new RegExp("(" + s + ")", "g"), "<font color=red>$1</font>");
+                                            document.write(newstr + "<br />" + "......");
+                                        </script>
+                                    {% else %}
+                                        {{new.content}}......
+                                    {% endif %}
+                                </td>
                                 <td>
                                     <button type="button" class="btn btn-success btn-xs">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 编辑</button>
@@ -127,7 +148,7 @@
                 <!-- /.box -->
             </div>
         </div>
-    
     </section>
     <!-- /.content -->
+
 {% endblock %}
