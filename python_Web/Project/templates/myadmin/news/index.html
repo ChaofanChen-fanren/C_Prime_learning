@@ -7,23 +7,7 @@
         <li><a href="{% url 'myadmin_index' %}"><i class="fa fa-home"></i> <span>首页</span></a></li>
 
         <li  class="active"><a href="{% url 'myadmin_news_index' 1 %}"><i class="fa fa-users"></i> <span>爬取新闻展示</span></a></li>
-        <li><a href="shop.html"><i class="fa fa-sitemap"></i> <span>店铺管理</span></a></li>
-        <li class="treeview">
-            <a href="category.html"><i class="fa fa-cutlery"></i> <span>菜品管理</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="category.html"> <i class="fa fa-circle-o"></i> 菜品分类</a></li>
-                <li><a href="product.html"> <i class="fa fa-circle-o"></i> 菜品信息</a></li>
-            </ul>
-        </li>
-        <li><a href="orders.html"><i class="fa fa-shopping-cart"></i> <span>订单管理</span></a></li>
-        <li><a href="#"><i class="fa fa-user"></i> <span>会员管理</span></a></li>
-        <li><a href="#"><i class="fa fa-key"></i> <span>权限管理</span></a></li>
-        <li><a href="#"><i class="fa fa-gear"></i> <span>系统配置</span></a></li>
-        <li><a href="#"><i class="fa fa-unlock-alt"></i> <span>认证体系</span></a></li>
+        <li><a href="{% url 'myadmin_news_add' %}"><i class="fa fa-sitemap"></i> <span>新闻添加</span></a></li>
     </ul>
     <!-- /.sidebar-menu -->
 {% endblock %}
@@ -31,16 +15,6 @@
 
 
 {% block main_body %}
-    <script type="text/javascript">
-        function brightenKeyword(val, keyword) {
-            const Reg = new RegExp(keyword, 'i');
-            let res = '';
-            if (val) {
-                res = val.replace(Reg, `<span style="color: red;">${keyword}</span>`);
-                return res;
-            }
-        }
-    </script>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -114,10 +88,10 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success btn-xs">
-                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 编辑</button>
-                                    <button type="button" class="btn btn-danger btn-xs">
-                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 删除</button>
+                                    <!-- <button type="button" class="btn btn-success btn-xs">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 编辑</button> -->
+                                    <button type="button" onclick="doDelete('{% url 'myadmin_news_del' new.id %}')" class="btn btn-danger btn-xs">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 删除</button>
                                 </td>
 
                             </tr>
@@ -126,7 +100,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
-                        <a role="button" href="add.html" class="btn btn-primary">
+                        <a role="button" href="{% url 'myadmin_news_add' %}" class="btn btn-primary">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加新闻</a>
                         <ul class="pagination pagination-sm no-margin pull-right">
                             {% if kw_list %}
@@ -134,12 +108,16 @@
                                 {% for page in plist %}
                                 <li {% if page == pIndex %}class="active"{% endif %}><a href="{% url 'myadmin_news_index' page %}?{{kw_list|join:'&'}}">{{page}}</a></li>
                                 {% endfor %}
+                                <li><a>...</a></li>
+                                <li><a href="{% url 'myadmin_news_index' maxpages %}?{{kw_list|join:'&'}}">{{maxpages}}</a></li>
                                 <li><a href="{% url 'myadmin_news_index' pIndex|add:1 %}?{{kw_list|join:'&'}}">&raquo;</a></li>
                             {% else %}
                                 <li><a href="{% url 'myadmin_news_index' pIndex|add:-1 %}">&laquo;</a></li>
                                 {% for page in plist %}
                                 <li {% if page == pIndex %}class="active"{% endif %}><a href="{% url 'myadmin_news_index' page %}">{{page}}</a></li>
                                 {% endfor %}
+                                <li><a>...</a></li>
+                                <li><a href="{% url 'myadmin_news_index' maxpages %}?{{kw_list|join:'&'}}">{{maxpages}}</a></li>
                                 <li><a href="{% url 'myadmin_news_index' pIndex|add:1 %}">&raquo;</a></li>
                             {% endif %}
                         </ul>

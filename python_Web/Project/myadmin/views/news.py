@@ -43,22 +43,43 @@ def index(request,pIndex=1):
     
     #页码数列表
     first_page = max(1,pIndex-3);
-    plist = range(first_page,first_page + 6) #显示包含此页的页列表
+    plist = range(first_page,min(first_page + 6,maxpages)) #显示包含此页的页列表
     #封装信息加载模板输出
-    context = {"newslist":list2,'plist':plist,'pIndex':pIndex,'kw_list':keyWord_list}
+    context = {"newslist":list2,'plist':plist,'pIndex':pIndex,'kw_list':keyWord_list,'maxpages':maxpages}
     return render(request,"myadmin/news/index.html",context)
 
 def add(request):
-    pass
+    '''加载添加页面'''
+    return render(request,"myadmin/news/add.html")
 
 def insert(request):
-    pass
+    '''执行添加'''
+    try:
+        ob = News()
+        ob.title = request.POST['news_title']
+        ob.urls = request.POST['news_urls']
+        ob.date = request.POST['news_date']
+        ob.school = request.POST['news_school']
+        ob.content = request.POST['news_content']
+        # print(ob.title)
+        # print(ob.urls)
+        # print(ob.date)
+        # print(ob.school)
+        # print(ob.content)
+        ob.save()
+        context={"info":"添加成功！"}
+    except Exception as err:
+        print(err)
+        context={"info":"添加失败"}
+    return render(request,"myadmin/info.html",context)
 
 def delete(request,uid):
-    pass
-
-def edit(request,uid):
-    pass
-
-def update(request,uid):
-    pass
+    '''删除信息'''
+    try:
+        ob = News.objects.get(id=uid)
+        ob.delete()
+        context={"info":"删除成功！"}
+    except Exception as err:
+        print(err)
+        context={"info":"删除失败"}
+    return render(request,"myadmin/info.html",context)
