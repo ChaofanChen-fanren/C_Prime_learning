@@ -18,7 +18,7 @@ def index(request,pIndex=1):
 
     #执行分页处理
     pIndex = int(pIndex)
-    page = Paginator(list,10) #以5条每页创建分页对象
+    page = Paginator(list,10) #以10条每页创建分页对象
     maxpages = page.num_pages #最大页数
 
     #判断页数是否越界
