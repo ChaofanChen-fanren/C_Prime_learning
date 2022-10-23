@@ -26,7 +26,7 @@
 
             option = {
                 title: {
-                    text: '日期统计',
+                    text: '月份发表篇数统计',
                     left: 200
                 },
                 tooltip: {
@@ -49,42 +49,18 @@
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    data: {{ month_value.month | safe }}
                 },
                 yAxis: {
                     type: 'value'
                 },
                 series: [
                     {
-                        name: 'Email',
+                        name: '发表篇数',
                         type: 'line',
                         stack: 'Total',
-                        data: [120, 132, 101, 134, 90, 230, 210]
+                        data: {{ month_value.value | safe }}
                     },
-                    {
-                        name: 'Union Ads',
-                        type: 'line',
-                        stack: 'Total',
-                        data: [220, 182, 191, 234, 290, 330, 310]
-                    },
-                    {
-                        name: 'Video Ads',
-                        type: 'line',
-                        stack: 'Total',
-                        data: [150, 232, 201, 154, 190, 330, 410]
-                    },
-                    {
-                        name: 'Direct',
-                        type: 'line',
-                        stack: 'Total',
-                        data: [320, 332, 301, 334, 390, 330, 320]
-                    },
-                    {
-                        name: 'Search Engine',
-                        type: 'line',
-                        stack: 'Total',
-                        data: [820, 932, 901, 934, 1290, 1330, 1320]
-                    }
                 ]
             };
 
@@ -94,30 +70,46 @@
     </div>
     <div id="left2">
         <script type="text/javascript">
-           var chartDom = document.getElementById('left2');
+            var chartDom = document.getElementById('left2');
             var myChart = echarts.init(chartDom, 'dark');
             var option;
 
             option = {
-                title: {
-                    text: '词频统计',
-                    left: 200
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
                 },
-                xAxis: {
-                    type: 'category',
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
                 },
-                yAxis: {
-                    type: 'value'
-                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: {{ word_count.word_name | safe }},
+                        axisTick: {
+                            alignWithLabel: true
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
                 series: [
                     {
-                        data: [120, 200, 150, 80, 70, 110, 130],
-                        type: 'bar'
+                        name: '出现次数',
+                        type: 'bar',
+                        barWidth: '70%',
+                        data: {{ word_count.word_value | safe }}
                     }
                 ]
             };
-
             option && myChart.setOption(option);
         </script>
     </div>
@@ -131,7 +123,8 @@
     </div>
     <div id="center2">
         <!-- <img src="{% static 'web/photo/new_wordcloud.jpg' %}" alt="新闻词云图" width=650px height=530px> -->
-        <img src="{% static 'web/photo/new_wordcloud.jpg' %}" alt="新闻词云图" width=640px>
+        <img src="{% static 'web/photo/new_wordcloud.jpg' %}" alt="新闻词云图" width=100%>
+        <a href="https://news.hbut.edu.cn/"><img src="https://www.hbut.edu.cn/images/logo.png" alt="新闻网" width=100%></a>
     </div>
     <div id="right1">
         <script type="text/javascript">
