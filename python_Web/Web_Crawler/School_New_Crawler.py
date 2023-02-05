@@ -98,32 +98,4 @@ def main():
             print(key + "已完成")
         print(url + "已完成")
 
-
-
-
-
-    # 将新闻内容写入到txt文件中
-    # # 爬取所有的新闻
-    # for key in title_date_page_list:
-    #     new_title = key.replace(' ','_') #用'_'换掉' '
-    #     new_date = title_date_page_list[key][0]
-    #     new_url = title_date_page_list[key][1]
-    #     new_content = news_text(new_url)
-    #     text_path = base_path + '/' + new_title + '.txt'
-    #     with open(text_path,'w',encoding='utf-8') as f:
-    #         f.write(key + '\n')
-    #         f.write(new_date + '\n')
-    #         f.write(new_content)
-
-
-
-
 main()
-
-# url = 'https://news.hbut.edu.cn/hgyw.htm'
-# title_date_page_list = news_page_title(url)
-# print(title_date_page_list)
-# news_text('https://news.hbut.edu.cn/info/1002/27551.htm')
-# https://news.hbut.edu.cn/info/1002/27740.htm
-# https://news.hbut.edu.cn/info/1002/27728.htm
-# https://news.hbut.edu.cn/info/1002/27551.htm

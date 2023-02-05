@@ -104,21 +104,21 @@
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加新闻</a>
                         <ul class="pagination pagination-sm no-margin pull-right">
                             {% if kw_list %}
-                                <li><a href="{% url 'myadmin_news_index' pIndex|add:-1 %}?{{kw_list|join:'&'}}">&laquo;</a></li>
+                                <li><a href="{% url 'myadmin_news_index' pIndex|add:-1 %}?keyword={{kw_list|join:'&'}}">&laquo;</a></li>
                                 {% for page in plist %}
-                                <li {% if page == pIndex %}class="active"{% endif %}><a href="{% url 'myadmin_news_index' page %}?{{kw_list|join:'&'}}">{{page}}</a></li>
+                                <li {% if page == pIndex %}class="active"{% endif %}><a href="{% url 'myadmin_news_index' page %}?keyword={{kw_list|join:'&'}}">{{page}}</a></li>
                                 {% endfor %}
                                 <li><a>...</a></li>
-                                <li><a href="{% url 'myadmin_news_index' maxpages %}?{{kw_list|join:'&'}}">{{maxpages}}</a></li>
-                                <li><a href="{% url 'myadmin_news_index' pIndex|add:1 %}?{{kw_list|join:'&'}}">&raquo;</a></li>
+                                <li><a href="{% url 'myadmin_news_index' maxpages %}?keyword={{kw_list|join:'&'}}">{{maxpages}}</a></li>
+                                <li><a href="{% url 'myadmin_news_index' pIndex|add:1 %}?keyword={{kw_list|join:'&'}}">&raquo;</a></li>
                             {% else %}
-                                <li><a href="{% url 'myadmin_news_index' pIndex|add:-1 %}">&laquo;</a></li>
+                                <li><a href="{% url 'myadmin_news_index' pIndex|add:-1 %}?keyword={{kw_list|join:'&'}}">&laquo;</a></li>
                                 {% for page in plist %}
-                                <li {% if page == pIndex %}class="active"{% endif %}><a href="{% url 'myadmin_news_index' page %}">{{page}}</a></li>
+                                <li {% if page == pIndex %}class="active"{% endif %}><a href="{% url 'myadmin_news_index' page %}?keyword={{kw_list|join:'&'}}">{{page}}</a></li>
                                 {% endfor %}
                                 <li><a>...</a></li>
-                                <li><a href="{% url 'myadmin_news_index' maxpages %}?{{kw_list|join:'&'}}">{{maxpages}}</a></li>
-                                <li><a href="{% url 'myadmin_news_index' pIndex|add:1 %}">&raquo;</a></li>
+                                <li><a href="{% url 'myadmin_news_index' maxpages %}?keyword={{kw_list|join:'&'}}">{{maxpages}}</a></li>
+                                <li><a href="{% url 'myadmin_news_index' pIndex|add:1 %}?keyword={{kw_list|join:'&'}}">&raquo;</a></li>
                             {% endif %}
                         </ul>
                     </div>

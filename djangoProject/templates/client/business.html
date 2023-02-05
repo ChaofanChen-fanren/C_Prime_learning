@@ -1,0 +1,31 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% block mainbody %}
+
+	<!--头部-->
+	<header>
+		<div class="header">
+			<h1>切换商户</h1>
+			<a href="{% url 'client_index' %}" class="return"><i></i></a>
+		</div>
+	</header>
+
+	<!--内容区-->
+	<article class="main-container">
+
+		<!--产品-->
+		<div class="list-content cartlist order-Pro">
+			<ul>
+                {% for vo in businesslist %}
+				<li class="line select">
+					<a href="{% url 'client_selectBusiness' %}?bid={{ vo.id }}">
+					<div class="pro-img"><img src="/static/uploads/business/{{ vo.cover_pic }}" alt=""></div>
+					<div class="pro-con"><h3>{{ vo.name }}</h3><p>微信：{{ vo.wechat }}</p><p>{{ vo.address }}</p></div>
+					</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+
+	</article>
+{% endblock %}

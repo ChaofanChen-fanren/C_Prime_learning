@@ -12,7 +12,7 @@ def index(request,pIndex=1):
     # 获取、判断并封装关keyword键搜索
     kw = request.GET.get("keyword",None)
     if kw:
-        # 查询员工账号或昵称中只要含有关键字的都可以
+        # 查询新闻或昵称中只要含有关键字的都可以
         list = list.filter(Q(title__contains=kw) | Q(content__contains=kw) | Q(school__contains=kw))
         keyWord_list.append(kw)
 
